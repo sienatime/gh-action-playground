@@ -6,9 +6,6 @@ on:
         type: string
         description: Tag name
 
-env:
-  GITHUB_TOKEN: ${{ secrets.REPO_PAT }}
-
 jobs:
   tag:
     runs-on: ubuntu-latest
@@ -16,6 +13,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/github-script@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_PAT }}
         with:
           script: |
             github.rest.git.createRef({
