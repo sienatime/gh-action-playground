@@ -7,18 +7,20 @@ on:
         description: Tag name
 
 env:
-  GITHUB_TOKEN: ${{ secrets.TAPPYBOT_PACKAGES }}
+  GITHUB_TOKEN: ${{ secrets.REPO_PAT }}
 
 jobs:
   tag:
     permissions:
       contents: write
-    uses: actions/github-script@v5
-    with:
-      script: |
-        github.rest.git.createRef({
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          ref: 'refs/tags/<tagname>',
-          sha: context.sha
-        })
+
+    steps:
+      - uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{ inputs.tag }}',
+              sha: context.sha
+            })
