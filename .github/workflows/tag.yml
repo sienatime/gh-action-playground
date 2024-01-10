@@ -13,12 +13,12 @@ jobs:
   tag:
     permissions:
       contents: write
-      uses: actions/github-script@v5
-      with:
-        script: |
-          github.rest.git.createRef({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            ref: 'refs/tags/<tagname>',
-            sha: context.sha
-          })
+    uses: actions/github-script@v5
+    with:
+      script: |
+        github.rest.git.createRef({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          ref: 'refs/tags/<tagname>',
+          sha: context.sha
+        })
