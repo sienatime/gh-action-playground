@@ -11,9 +11,9 @@ env:
 
 jobs:
   tag:
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - uses: actions/github-script@v5
         with:
