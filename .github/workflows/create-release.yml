@@ -1,0 +1,22 @@
+name: Create GitHub Release On Tag Pushed
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set version name
+        run: echo "VERSION_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - uses: ncipollo/release-action@v1
+        with:
+          generateReleaseNotes: true
