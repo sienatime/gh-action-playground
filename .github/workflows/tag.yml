@@ -14,8 +14,9 @@ jobs:
     steps:
       - uses: touchlab/autoversion-finishrelease@main
         id: autoversion-finishrelease
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_PAT }}
         with:
-          token: ${{ secrets.REPO_PAT }}
           commitMessage: "release for ${{ inputs.tag }}"
           tagMessage: "release version ${{ inputs.tag }}"
           tagVersion: ${{ inputs.tag }}
