@@ -12,13 +12,11 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/github-script@v5
+      - uses: touchlab/autoversion-finishrelease@main
+        id: autoversion-finishrelease
         with:
           token: ${{ secrets.REPO_PAT }}
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'refs/tags/${{ inputs.tag }}',
-              sha: context.sha
-            })
+          commitMessage: "release for ${{ inputs.tag }}"
+          tagMessage: "release version ${{ inputs.tag }}"
+          tagVersion: ${{ inputs.tag }}
+          branchName: "main"
