@@ -12,6 +12,12 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout the repo with tags
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
       - uses: touchlab/autoversion-finishrelease@main
         id: autoversion-finishrelease
         env:
