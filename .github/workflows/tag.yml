@@ -13,9 +13,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/github-script@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPO_PAT }}
         with:
+          token: ${{ secrets.REPO_PAT }}
           script: |
             github.rest.git.createRef({
               owner: context.repo.owner,
